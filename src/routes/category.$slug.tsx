@@ -55,7 +55,7 @@ function CategoryPage() {
 
       <div className="mt-6 flex flex-wrap gap-2">
         <FilterChip active={brand === "all"} onClick={() => setBrand("all")}>All brands</FilterChip>
-        {cat.brands.map((b) => (
+        {cat.brands.map((b: string) => (
           <FilterChip key={b} active={brand === b} onClick={() => setBrand(b)}>{b}</FilterChip>
         ))}
       </div>
