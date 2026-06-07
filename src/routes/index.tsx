@@ -16,6 +16,49 @@ export const Route = createFileRoute("/")({
 
 const featured = PRODUCTS.filter((p) => p.tag).slice(0, 8);
 
+// Picks for the hero bento (one tall + small grid, à la image 2)
+const heroPicks = [
+  PRODUCTS.find((p) => p.id === "lap-3")!, // MacBook Air — tall feature
+  PRODUCTS.find((p) => p.id === "lap-2")!, // ASUS ROG
+  PRODUCTS.find((p) => p.id === "mon-2")!, // Samsung Odyssey G7
+  PRODUCTS.find((p) => p.id === "ms-1")!,  // Logitech MX Master 3S
+  PRODUCTS.find((p) => p.id === "kb-2")!,  // MX Keys S
+];
+
+function HeroBento() {
+  const [feature, ...rest] = heroPicks;
+  return (
+    <div className="grid h-[440px] grid-cols-2 grid-rows-2 gap-3 md:h-[520px]">
+      <BentoCard product={feature} className="row-span-2" />
+      {rest.slice(0, 4).map((p) => (
+        <BentoCard key={p.id} product={p} />
+      ))}
+    </div>
+  );
+}
+
+function BentoCard({ product, className }: { product: typeof PRODUCTS[number]; className?: string }) {
+  return (
+    <Link
+      to="/product/$id"
+      params={{ id: product.id }}
+      className={`group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent hover:shadow-glow ${className ?? ""}`}
+    >
+      <img
+        src={product.image}
+        alt={product.name}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-3">
+        <p className="text-sm font-medium text-foreground line-clamp-1">{product.name}</p>
+        <p className="mt-0.5 font-mono text-xs text-accent">₹{product.price.toLocaleString("en-IN")}</p>
+      </div>
+    </Link>
+  );
+}
+
 function Home() {
   return (
     <div>
@@ -23,44 +66,49 @@ function Home() {
       <section className="relative overflow-hidden border-b border-border">
         <div className="absolute inset-0 grid-bg opacity-40" />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-        <div className="relative mx-auto max-w-7xl px-4 py-20 md:py-28">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-accent backdrop-blur">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-            online · {PRODUCTS.length} products in stock
-          </div>
-          <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
-            Computers, components &{" "}
-            <span className="bg-gradient-to-r from-accent to-foreground bg-clip-text text-transparent">
-              everything in between.
-            </span>
-          </h1>
-          <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-            A curated catalogue of laptops, desktops, monitors, RAM, SSDs and the accessories that
-            make them sing. Hand-picked. Honest specs. Zero clutter.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button asChild size="lg">
-              <Link to="/category/$slug" params={{ slug: "laptops" }}>
-                Shop laptops <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link to="/accessories">Browse accessories</Link>
-            </Button>
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-4 py-16 md:py-20 lg:grid-cols-[1.1fr_1fr] lg:items-center lg:gap-12">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 font-mono text-[11px] uppercase tracking-widest text-accent backdrop-blur">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+              online · {PRODUCTS.length} products in stock
+            </div>
+            <h1 className="mt-6 max-w-2xl text-4xl font-semibold leading-[1.05] tracking-tight md:text-6xl">
+              Computers, components &{" "}
+              <span className="bg-gradient-to-r from-accent to-foreground bg-clip-text text-transparent">
+                everything in between.
+              </span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+              A curated catalogue of laptops, desktops, monitors, RAM, SSDs and the accessories that
+              make them sing. Hand-picked. Honest specs. Zero clutter.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Button asChild size="lg">
+                <Link to="/category/$slug" params={{ slug: "laptops" }}>
+                  Shop laptops <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link to="/accessories">Browse accessories</Link>
+              </Button>
+            </div>
+
+            <div className="mt-10 grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
+              {[
+                { icon: Truck, label: "Fast shipping" },
+                { icon: Shield, label: "Verified sellers" },
+                { icon: Zap, label: "1-click checkout" },
+                { icon: Cpu, label: "Spec-first picks" },
+              ].map((f) => (
+                <div key={f.label} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <f.icon className="h-4 w-4 text-accent" /> {f.label}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="mt-14 grid max-w-3xl grid-cols-2 gap-6 md:grid-cols-4">
-            {[
-              { icon: Truck, label: "Fast shipping" },
-              { icon: Shield, label: "Verified sellers" },
-              { icon: Zap, label: "1-click checkout" },
-              { icon: Cpu, label: "Spec-first picks" },
-            ].map((f) => (
-              <div key={f.label} className="flex items-center gap-2 text-sm text-muted-foreground">
-                <f.icon className="h-4 w-4 text-accent" /> {f.label}
-              </div>
-            ))}
-          </div>
+          {/* Bento featured grid */}
+          <HeroBento />
         </div>
       </section>
 

@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ExternalLink, ShoppingCart, Star } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { formatPrice } from "@/lib/products";
@@ -11,7 +12,11 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent hover:shadow-glow">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+      <Link
+        to="/product/$id"
+        params={{ id: product.id }}
+        className="relative block aspect-[4/3] overflow-hidden bg-muted"
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -28,12 +33,18 @@ export function ProductCard({ product }: { product: Product }) {
             -{discount}%
           </span>
         )}
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col gap-3 p-4">
         <div>
           <p className="text-[11px] uppercase tracking-wider text-muted-foreground">{product.brand}</p>
-          <h3 className="mt-1 line-clamp-2 text-sm font-medium text-foreground">{product.name}</h3>
+          <Link
+            to="/product/$id"
+            params={{ id: product.id }}
+            className="mt-1 line-clamp-2 block text-sm font-medium text-foreground hover:text-accent"
+          >
+            {product.name}
+          </Link>
         </div>
 
         <div className="flex items-center gap-1 text-xs text-muted-foreground">
@@ -63,12 +74,10 @@ export function ProductCard({ product }: { product: Product }) {
           >
             <ShoppingCart className="mr-1 h-4 w-4" /> Add
           </Button>
-          <Button
-            size="sm"
-            className="flex-1"
-            onClick={() => window.open(product.buyUrl, "_blank", "noopener,noreferrer")}
-          >
-            Buy <ExternalLink className="ml-1 h-3.5 w-3.5" />
+          <Button asChild size="sm" className="flex-1">
+            <Link to="/product/$id" params={{ id: product.id }}>
+              View <ExternalLink className="ml-1 h-3.5 w-3.5" />
+            </Link>
           </Button>
         </div>
         <button

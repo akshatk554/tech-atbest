@@ -84,7 +84,7 @@ export function Header() {
                     onClick={() => {
                       setQ("");
                       setFocus(false);
-                      navigate({ to: "/category/$slug", params: { slug: p.category } });
+                      navigate({ to: "/product/$id", params: { id: p.id } });
                     }}
                   >
                     <img src={p.image} alt="" className="h-10 w-10 rounded object-cover" />
