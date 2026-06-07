@@ -16,6 +16,49 @@ export const Route = createFileRoute("/")({
 
 const featured = PRODUCTS.filter((p) => p.tag).slice(0, 8);
 
+// Picks for the hero bento (one tall + small grid, à la image 2)
+const heroPicks = [
+  PRODUCTS.find((p) => p.id === "lap-3")!, // MacBook Air — tall feature
+  PRODUCTS.find((p) => p.id === "lap-2")!, // ASUS ROG
+  PRODUCTS.find((p) => p.id === "mon-2")!, // Samsung Odyssey G7
+  PRODUCTS.find((p) => p.id === "ms-1")!,  // Logitech MX Master 3S
+  PRODUCTS.find((p) => p.id === "kb-2")!,  // MX Keys S
+];
+
+function HeroBento() {
+  const [feature, ...rest] = heroPicks;
+  return (
+    <div className="grid h-[440px] grid-cols-2 grid-rows-2 gap-3 md:h-[520px]">
+      <BentoCard product={feature} className="row-span-2" />
+      {rest.slice(0, 4).map((p) => (
+        <BentoCard key={p.id} product={p} />
+      ))}
+    </div>
+  );
+}
+
+function BentoCard({ product, className }: { product: typeof PRODUCTS[number]; className?: string }) {
+  return (
+    <Link
+      to="/product/$id"
+      params={{ id: product.id }}
+      className={`group relative overflow-hidden rounded-xl border border-border bg-card transition-all hover:border-accent hover:shadow-glow ${className ?? ""}`}
+    >
+      <img
+        src={product.image}
+        alt={product.name}
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 p-3">
+        <p className="text-sm font-medium text-foreground line-clamp-1">{product.name}</p>
+        <p className="mt-0.5 font-mono text-xs text-accent">₹{product.price.toLocaleString("en-IN")}</p>
+      </div>
+    </Link>
+  );
+}
+
 function Home() {
   return (
     <div>
