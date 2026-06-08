@@ -16,7 +16,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as PoliciesReturnsRouteImport } from './routes/policies.returns'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
-import { Route as PoliciesReturnsRouteImport } from './routes/policies.returns'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -51,11 +50,6 @@ const PoliciesReturnsRoute = PoliciesReturnsRouteImport.update({
 const CategorySlugRoute = CategorySlugRouteImport.update({
   id: '/category/$slug',
   path: '/category/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoliciesReturnsRoute = PoliciesReturnsRouteImport.update({
-  id: '/policies/returns',
-  path: '/policies/returns',
   getParentRoute: () => rootRouteImport,
 } as any)
 
