@@ -1,0 +1,23 @@
+# tech.at.best
+
+> A curated electronics store for laptops, desktops, monitors, RAM, SSDs and computer accessories — hand-picked specs with one-click checkout.
+
+tech.at.best is an Indian-rupee e-commerce front-end that lists computers and components from brands like Apple, Lenovo, ASUS, HP, Dell, Samsung, LG, Corsair, Kingston, Samsung, Logitech, Razer, Sony and more. Each product page shows specs, price comparison across major retailers, and a buy/cart flow.
+
+## Pages
+
+- [Home](/): Landing page with featured picks, clearance deals, and category browse.
+- [Laptops](/category/laptops): Ultrabooks, gaming and creator notebooks.
+- [Desktops](/category/desktops): Prebuilt towers, all-in-ones, mini PCs.
+- [Accessories](/accessories): Monitors, RAM, SSDs, keyboards, mice, headphones.
+- [Monitors](/category/monitors): 4K, ultrawide and high-refresh panels.
+- [RAM](/category/ram): DDR4 and DDR5 memory kits.
+- [SSDs](/category/ssd): NVMe and SATA storage.
+- [Keyboards](/category/keyboards): Mechanical and low-profile boards.
+- [Mice](/category/mice): Productivity and gaming pointers.
+- [Headphones](/category/headphones): Studio, gaming and wireless cans.
+- [Sell on tech.at.best](/sell): Seller application form for vendors.
+
+## Optional
+
+- Product detail pages live at /product/{id} (e.g. /product/lap-3).
