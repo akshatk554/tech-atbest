@@ -30,14 +30,14 @@ export const CATEGORIES: {
   brands: string[];
   group: "computers" | "accessories";
 }[] = [
-  { slug: "laptops", title: "Laptops", blurb: "Ultrabooks, gaming rigs & creator machines", brands: ["Lenovo", "ASUS", "Apple", "Samsung", "HP", "Dell"], group: "computers" },
-  { slug: "desktops", title: "Desktops", blurb: "Prebuilt towers & all-in-ones", brands: ["HP", "Dell", "Apple", "Lenovo"], group: "computers" },
-  { slug: "monitors", title: "Monitors", blurb: "4K, ultrawide & high refresh panels", brands: ["LG", "Samsung", "Dell", "BenQ"], group: "accessories" },
-  { slug: "ram", title: "RAM", blurb: "DDR4 & DDR5 memory kits", brands: ["Corsair", "Kingston", "G.Skill", "Crucial"], group: "accessories" },
-  { slug: "ssd", title: "SSDs", blurb: "NVMe & SATA storage", brands: ["Samsung", "WD", "Crucial", "Kingston"], group: "accessories" },
-  { slug: "keyboards", title: "Keyboards", blurb: "Mechanical & low-profile boards", brands: ["Logitech", "Keychron", "Razer"], group: "accessories" },
-  { slug: "mice", title: "Mice", blurb: "Precision & gaming pointers", brands: ["Logitech", "Razer", "SteelSeries"], group: "accessories" },
-  { slug: "headphones", title: "Headphones", blurb: "Studio, gaming & wireless cans", brands: ["Sony", "Bose", "JBL", "HyperX"], group: "accessories" },
+  { slug: "laptops", title: "Laptops", blurb: "Ultrabooks, gaming rigs and creator machines from Apple, Lenovo, ASUS, HP, Dell and Samsung — hand-picked specs with one-click checkout.", brands: ["Lenovo", "ASUS", "Apple", "Samsung", "HP", "Dell"], group: "computers" },
+  { slug: "desktops", title: "Desktops", blurb: "Prebuilt towers, all-in-ones and compact mini PCs from Apple, Dell, HP and Lenovo — workstation power and gaming rigs ready out of the box.", brands: ["HP", "Dell", "Apple", "Lenovo"], group: "computers" },
+  { slug: "monitors", title: "Monitors", blurb: "4K, ultrawide and high-refresh gaming panels from LG, Samsung, Dell and BenQ — colour-accurate picks for both work and play.", brands: ["LG", "Samsung", "Dell", "BenQ"], group: "accessories" },
+  { slug: "ram", title: "RAM", blurb: "DDR4 and DDR5 memory kits from Corsair, Kingston, G.Skill and Crucial — XMP and EXPO tuned upgrades for desktops and laptops.", brands: ["Corsair", "Kingston", "G.Skill", "Crucial"], group: "accessories" },
+  { slug: "ssd", title: "SSDs", blurb: "NVMe and SATA storage from Samsung, WD, Crucial and Kingston — boot-drive upgrades and portable SSDs with verified read and write speeds.", brands: ["Samsung", "WD", "Crucial", "Kingston"], group: "accessories" },
+  { slug: "keyboards", title: "Keyboards", blurb: "Mechanical, low-profile and wireless keyboards from Keychron, Logitech and Razer — productivity boards and tournament-grade esports gear.", brands: ["Logitech", "Keychron", "Razer"], group: "accessories" },
+  { slug: "mice", title: "Mice", blurb: "Precision productivity and esports mice from Logitech, Razer and SteelSeries — ergonomic, ultralight and Bluetooth picks for every desk.", brands: ["Logitech", "Razer", "SteelSeries"], group: "accessories" },
+  { slug: "headphones", title: "Headphones", blurb: "Studio, gaming and wireless cans from Sony, Bose, JBL and HyperX — flagship ANC headphones and budget-friendly daily drivers.", brands: ["Sony", "Bose", "JBL", "HyperX"], group: "accessories" },
 ];
 
 const amazon = (q: string) => `https://www.amazon.in/s?k=${encodeURIComponent(q)}`;

@@ -11,11 +11,29 @@ export const Route = createFileRoute("/category/$slug")({
     if (!cat) throw notFound();
     return { cat };
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.cat.title} — tech.at.best` },
           { name: "description", content: loaderData.cat.blurb },
+          { property: "og:title", content: `${loaderData.cat.title} — tech.at.best` },
+          { property: "og:description", content: loaderData.cat.blurb },
+          { property: "og:type", content: "website" },
+          { property: "og:url", content: `https://tech-atbest.lovable.app/category/${params.slug}` },
+        ]
+      : [],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              name: `${loaderData.cat.title} — tech.at.best`,
+              description: loaderData.cat.blurb,
+              url: `https://tech-atbest.lovable.app/category/${params.slug}`,
+            }),
+          },
         ]
       : [],
   }),

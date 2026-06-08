@@ -9,6 +9,37 @@ export const Route = createFileRoute("/")({
     meta: [
       { title: "tech.at.best — Computers & accessories" },
       { name: "description", content: "Curated laptops, desktops, monitors and components with one-click checkout to Amazon." },
+      { property: "og:title", content: "tech.at.best — Computers & accessories" },
+      { property: "og:description", content: "Curated laptops, desktops, monitors and components with one-click checkout to Amazon." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://tech-atbest.lovable.app/" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "tech.at.best",
+          url: "https://tech-atbest.lovable.app",
+          email: "akshatk554@gmail.com",
+          sameAs: [],
+        }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "tech.at.best",
+          url: "https://tech-atbest.lovable.app",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: "https://tech-atbest.lovable.app/?q={search_term_string}",
+            "query-input": "required name=search_term_string",
+          },
+        }),
+      },
     ],
   }),
   component: Home,
@@ -145,7 +176,7 @@ function Home() {
               <p className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
                 {c.group === "computers" ? "/computers" : "/accessories"}
               </p>
-              <h3 className="mt-2 text-lg font-semibold">{c.title}</h3>
+              <h2 className="mt-2 text-lg font-semibold">{c.title}</h2>
               <p className="mt-1 text-xs text-muted-foreground">{c.blurb}</p>
               <div className="mt-4 flex items-center gap-1 text-xs text-accent">
                 Explore <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />

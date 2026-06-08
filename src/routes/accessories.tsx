@@ -7,7 +7,11 @@ export const Route = createFileRoute("/accessories")({
   head: () => ({
     meta: [
       { title: "Accessories & components — tech.at.best" },
-      { name: "description", content: "Monitors, RAM, SSDs, keyboards, mice and headphones — all the parts that complete your rig." },
+      { name: "description", content: "Monitors, RAM, SSDs, keyboards, mice and headphones — all the parts that complete your rig, curated from top brands." },
+      { property: "og:title", content: "Accessories & components — tech.at.best" },
+      { property: "og:description", content: "Monitors, RAM, SSDs, keyboards, mice and headphones — all the parts that complete your rig." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://tech-atbest.lovable.app/accessories" },
     ],
   }),
   component: AccessoriesPage,

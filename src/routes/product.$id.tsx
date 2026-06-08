@@ -28,13 +28,44 @@ export const Route = createFileRoute("/product/$id")({
     if (!product) throw notFound();
     return { product };
   },
-  head: ({ loaderData }) => ({
+  head: ({ loaderData, params }) => ({
     meta: loaderData
       ? [
           { title: `${loaderData.product.name} — tech.at.best` },
           { name: "description", content: loaderData.product.about ?? loaderData.product.name },
-          { property: "og:title", content: loaderData.product.name },
+          { property: "og:title", content: `${loaderData.product.name} — tech.at.best` },
+          { property: "og:description", content: loaderData.product.about ?? loaderData.product.name },
+          { property: "og:type", content: "product" },
+          { property: "og:url", content: `https://tech-atbest.lovable.app/product/${params.id}` },
           { property: "og:image", content: loaderData.product.image },
+        ]
+      : [],
+    scripts: loaderData
+      ? [
+          {
+            type: "application/ld+json",
+            children: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Product",
+              name: loaderData.product.name,
+              image: loaderData.product.image,
+              description: loaderData.product.about ?? loaderData.product.name,
+              brand: { "@type": "Brand", name: loaderData.product.brand },
+              sku: loaderData.product.id.toUpperCase(),
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: loaderData.product.rating,
+                reviewCount: 24,
+              },
+              offers: {
+                "@type": "Offer",
+                priceCurrency: "INR",
+                price: loaderData.product.price,
+                availability: "https://schema.org/InStock",
+                url: `https://tech-atbest.lovable.app/product/${params.id}`,
+              },
+            }),
+          },
         ]
       : [],
   }),
@@ -109,6 +140,8 @@ function ProductHero({ product }: { product: Product }) {
             <button
               key={src}
               onClick={() => setActive(i)}
+              aria-label={`Show product image ${i + 1} of ${gallery.length}`}
+              aria-pressed={active === i}
               className={cn(
                 "overflow-hidden rounded-md border bg-muted transition",
                 active === i ? "border-accent ring-1 ring-accent" : "border-border opacity-70 hover:opacity-100",

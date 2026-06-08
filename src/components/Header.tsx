@@ -98,7 +98,13 @@ export function Header() {
             )}
           </div>
 
-          <Button variant="ghost" size="icon" className="relative" onClick={() => setOpen(true)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="relative"
+            onClick={() => setOpen(true)}
+            aria-label={`Open shopping cart${count > 0 ? ` (${count} items)` : ""}`}
+          >
             <ShoppingCart className="h-4 w-4" />
             {count > 0 && (
               <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-accent px-1 text-[10px] font-bold text-accent-foreground">
@@ -107,7 +113,14 @@ export function Header() {
             )}
           </Button>
 
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMenu(!menu)}>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            onClick={() => setMenu(!menu)}
+            aria-label={menu ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={menu}
+          >
             {menu ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </Button>
         </div>

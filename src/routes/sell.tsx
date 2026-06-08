@@ -12,7 +12,11 @@ export const Route = createFileRoute("/sell")({
   head: () => ({
     meta: [
       { title: "Sell on tech.at.best" },
-      { name: "description", content: "Become a seller — list your computers, components and accessories." },
+      { name: "description", content: "Become a seller — list your computers, components and accessories on tech.at.best with flat 5% commission and weekly payouts." },
+      { property: "og:title", content: "Sell on tech.at.best — Make money with us" },
+      { property: "og:description", content: "Apply to list your laptops, components and accessories. Flat 5% commission, no listing fees, weekly payouts." },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://tech-atbest.lovable.app/sell" },
     ],
   }),
   component: SellPage,
@@ -50,7 +54,7 @@ function SellPage() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-24 text-center">
         <CheckCircle2 className="mx-auto h-12 w-12 text-accent" />
-        <h1 className="mt-6 text-3xl font-semibold tracking-tight">You're on the list</h1>
+        <h1 className="mt-6 text-3xl font-semibold tracking-tight">Seller Application Received</h1>
         <p className="mt-3 text-muted-foreground">
           Thanks for applying to sell on tech.at.best. Our team will review your details and reach out at the email you provided.
         </p>
