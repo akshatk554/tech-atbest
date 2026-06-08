@@ -35,7 +35,7 @@ export function Footer() {
         <div>
           <h4 className="font-mono text-xs uppercase tracking-widest text-accent">// Policies</h4>
           <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-            <li><a className="hover:text-foreground" href="#">Return & refund policy</a></li>
+            <li><Link to="/policies/returns" className="hover:text-foreground">Return & refund policy</Link></li>
             <li><a className="hover:text-foreground" href="#">Shipping & delivery</a></li>
             <li><a className="hover:text-foreground" href="#">Warranty</a></li>
             <li><a className="hover:text-foreground" href="#">Privacy & terms</a></li>
