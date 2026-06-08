@@ -140,6 +140,8 @@ function ProductHero({ product }: { product: Product }) {
             <button
               key={src}
               onClick={() => setActive(i)}
+              aria-label={`Show product image ${i + 1} of ${gallery.length}`}
+              aria-pressed={active === i}
               className={cn(
                 "overflow-hidden rounded-md border bg-muted transition",
                 active === i ? "border-accent ring-1 ring-accent" : "border-border opacity-70 hover:opacity-100",
