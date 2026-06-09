@@ -9,14 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WishlistRouteImport } from './routes/wishlist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as DealsRouteImport } from './routes/deals'
+import { Route as CompareRouteImport } from './routes/compare'
+import { Route as BuildPcRouteImport } from './routes/build-pc'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
 import { Route as PoliciesReturnsRouteImport } from './routes/policies.returns'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
+const WishlistRoute = WishlistRouteImport.update({
+  id: '/wishlist',
+  path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -25,6 +35,26 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DealsRoute = DealsRouteImport.update({
+  id: '/deals',
+  path: '/deals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuildPcRoute = BuildPcRouteImport.update({
+  id: '/build-pc',
+  path: '/build-pc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
@@ -56,8 +86,13 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
+  '/build-pc': typeof BuildPcRoute
+  '/compare': typeof CompareRoute
+  '/deals': typeof DealsRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
   '/policies/returns': typeof PoliciesReturnsRoute
   '/product/$id': typeof ProductIdRoute
@@ -65,8 +100,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
+  '/build-pc': typeof BuildPcRoute
+  '/compare': typeof CompareRoute
+  '/deals': typeof DealsRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
   '/policies/returns': typeof PoliciesReturnsRoute
   '/product/$id': typeof ProductIdRoute
@@ -75,8 +115,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
+  '/build-pc': typeof BuildPcRoute
+  '/compare': typeof CompareRoute
+  '/deals': typeof DealsRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
   '/policies/returns': typeof PoliciesReturnsRoute
   '/product/$id': typeof ProductIdRoute
@@ -86,8 +131,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/account'
+    | '/build-pc'
+    | '/compare'
+    | '/deals'
     | '/sell'
     | '/sitemap.xml'
+    | '/wishlist'
     | '/category/$slug'
     | '/policies/returns'
     | '/product/$id'
@@ -95,8 +145,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessories'
+    | '/account'
+    | '/build-pc'
+    | '/compare'
+    | '/deals'
     | '/sell'
     | '/sitemap.xml'
+    | '/wishlist'
     | '/category/$slug'
     | '/policies/returns'
     | '/product/$id'
@@ -104,8 +159,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessories'
+    | '/account'
+    | '/build-pc'
+    | '/compare'
+    | '/deals'
     | '/sell'
     | '/sitemap.xml'
+    | '/wishlist'
     | '/category/$slug'
     | '/policies/returns'
     | '/product/$id'
@@ -114,8 +174,13 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AccountRoute: typeof AccountRoute
+  BuildPcRoute: typeof BuildPcRoute
+  CompareRoute: typeof CompareRoute
+  DealsRoute: typeof DealsRoute
   SellRoute: typeof SellRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WishlistRoute: typeof WishlistRoute
   CategorySlugRoute: typeof CategorySlugRoute
   PoliciesReturnsRoute: typeof PoliciesReturnsRoute
   ProductIdRoute: typeof ProductIdRoute
@@ -123,6 +188,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wishlist': {
+      id: '/wishlist'
+      path: '/wishlist'
+      fullPath: '/wishlist'
+      preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -135,6 +207,34 @@ declare module '@tanstack/react-router' {
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/deals': {
+      id: '/deals'
+      path: '/deals'
+      fullPath: '/deals'
+      preLoaderRoute: typeof DealsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/build-pc': {
+      id: '/build-pc'
+      path: '/build-pc'
+      fullPath: '/build-pc'
+      preLoaderRoute: typeof BuildPcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/accessories': {
@@ -178,8 +278,13 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AccountRoute: AccountRoute,
+  BuildPcRoute: BuildPcRoute,
+  CompareRoute: CompareRoute,
+  DealsRoute: DealsRoute,
   SellRoute: SellRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WishlistRoute: WishlistRoute,
   CategorySlugRoute: CategorySlugRoute,
   PoliciesReturnsRoute: PoliciesReturnsRoute,
   ProductIdRoute: ProductIdRoute,
@@ -187,13 +292,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

@@ -12,9 +12,12 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
+import { WishlistProvider } from "@/lib/wishlist";
+import { CompareProvider } from "@/lib/compare";
 import { CartSheet } from "@/components/CartSheet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { MobileTabBar } from "@/components/MobileTabBar";
 import { Toaster } from "@/components/ui/sonner";
 
 function NotFoundComponent() {
@@ -82,22 +85,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "tech.at.best — Computers & accessories, curated" },
-      { name: "description", content: "Laptops, desktops, monitors, RAM, SSDs and accessories — hand-picked specs with one-click checkout." },
-      { property: "og:title", content: "tech.at.best — Computers & accessories, curated" },
-      { property: "og:description", content: "Laptops, desktops, monitors, RAM, SSDs and accessories — hand-picked specs with one-click checkout." },
+      { name: "theme-color", content: "#1e3a8a" },
+      { title: "tech.at.best — Build. Upgrade. Game. Create." },
+      { name: "description", content: "Premium laptops, desktops, components and accessories. Hand-picked specs, transparent pricing, fast delivery." },
+      { property: "og:title", content: "tech.at.best — Build. Upgrade. Game. Create." },
+      { property: "og:description", content: "Premium laptops, desktops, components and accessories. Hand-picked specs, transparent pricing, fast delivery." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "tech.at.best — Computers & accessories, curated" },
-      { name: "twitter:description", content: "Laptops, desktops, monitors, RAM, SSDs and accessories — hand-picked specs with one-click checkout." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/870d4741-d7e0-47aa-bdb8-f4f997c37d36/id-preview-8f28de6f--5adedc18-4aa8-44c3-972a-1f5f5fadc6f6.lovable.app-1780731489104.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/870d4741-d7e0-47aa-bdb8-f4f997c37d36/id-preview-8f28de6f--5adedc18-4aa8-44c3-972a-1f5f5fadc6f6.lovable.app-1780731489104.png" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "tech.at.best — Build. Upgrade. Game. Create." },
+      { name: "twitter:description", content: "Premium laptops, desktops, components and accessories. Hand-picked specs, transparent pricing, fast delivery." },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,
@@ -126,15 +128,20 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <CartProvider>
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-          <Footer />
-        </div>
-        <CartSheet />
-        <Toaster />
+        <WishlistProvider>
+          <CompareProvider>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1 pb-16 md:pb-0">
+                <Outlet />
+              </main>
+              <Footer />
+            </div>
+            <MobileTabBar />
+            <CartSheet />
+            <Toaster />
+          </CompareProvider>
+        </WishlistProvider>
       </CartProvider>
     </QueryClientProvider>
   );
