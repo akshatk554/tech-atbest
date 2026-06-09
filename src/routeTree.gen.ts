@@ -15,6 +15,7 @@ import { Route as SellRouteImport } from './routes/sell'
 import { Route as DealsRouteImport } from './routes/deals'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as BuildPcRouteImport } from './routes/build-pc'
+import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
@@ -51,6 +52,11 @@ const BuildPcRoute = BuildPcRouteImport.update({
   path: '/build-pc',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccountRoute = AccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AccessoriesRoute = AccessoriesRouteImport.update({
   id: '/accessories',
   path: '/accessories',
@@ -80,6 +86,7 @@ const CategorySlugRoute = CategorySlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
+  '/account': typeof AccountRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
@@ -122,6 +131,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accessories'
+    | '/account'
     | '/build-pc'
     | '/compare'
     | '/deals'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/accessories'
+    | '/account'
     | '/build-pc'
     | '/compare'
     | '/deals'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/accessories'
+    | '/account'
     | '/build-pc'
     | '/compare'
     | '/deals'
@@ -162,6 +174,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
+  AccountRoute: typeof AccountRoute
   BuildPcRoute: typeof BuildPcRoute
   CompareRoute: typeof CompareRoute
   DealsRoute: typeof DealsRoute
@@ -217,6 +230,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BuildPcRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/account': {
+      id: '/account'
+      path: '/account'
+      fullPath: '/account'
+      preLoaderRoute: typeof AccountRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/accessories': {
       id: '/accessories'
       path: '/accessories'
@@ -258,6 +278,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
+  AccountRoute: AccountRoute,
   BuildPcRoute: BuildPcRoute,
   CompareRoute: CompareRoute,
   DealsRoute: DealsRoute,
@@ -271,13 +292,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
