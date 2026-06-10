@@ -244,13 +244,35 @@ function ProductHero({ product }: { product: Product }) {
             >
               Buy now
             </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              aria-label={wl.has(product.id) ? "Remove from wishlist" : "Save to wishlist"}
+              onClick={() => { wl.toggle(product.id); toast.success(wl.has(product.id) ? "Removed from wishlist" : "Saved to wishlist"); }}
+              className={cn(wl.has(product.id) && "border-accent text-accent")}
+            >
+              <Heart className={cn("h-4 w-4", wl.has(product.id) && "fill-current")} />
+            </Button>
           </div>
 
-          <div className="mt-4 grid grid-cols-3 gap-3 text-[11px] text-muted-foreground">
+          {/* Stock urgency + live viewers */}
+          <div className="mt-4 flex flex-wrap items-center gap-3 rounded-lg border border-warning/30 bg-warning/5 px-3 py-2 text-[11px]">
+            <span className="inline-flex items-center gap-1 font-semibold text-warning"><Flame className="h-3 w-3" /> Only {stockLeft} left in stock</span>
+            <span className="text-muted-foreground">· {viewers} people viewing now</span>
+          </div>
+
+          <div className="mt-3 grid grid-cols-3 gap-3 text-[11px] text-muted-foreground">
             <span className="inline-flex items-center gap-1"><Truck className="h-3 w-3 text-accent" /> Free shipping</span>
             <span className="inline-flex items-center gap-1"><RefreshCcw className="h-3 w-3 text-accent" /> 7-day returns</span>
             <span className="inline-flex items-center gap-1"><ShieldCheck className="h-3 w-3 text-accent" /> Verified seller</span>
           </div>
+
+          <button
+            onClick={() => { cmp.toggle(product.id); toast.success(cmp.has(product.id) ? "Removed from compare" : "Added to compare"); }}
+            className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-medium text-accent hover:underline"
+          >
+            <Plus className="h-3 w-3" /> {cmp.has(product.id) ? "In compare list" : "Add to compare"}
+          </button>
         </div>
 
         <OffersTable offers={offers} />
