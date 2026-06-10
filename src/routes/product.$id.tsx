@@ -1,24 +1,34 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   formatPrice,
   getGallery,
   getOffers,
   getProduct,
   getSimilar,
+  PRODUCTS,
   type Product,
 } from "@/lib/products";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/lib/cart";
+import { useWishlist } from "@/lib/wishlist";
+import { useCompare } from "@/lib/compare";
+import { useRecentlyViewed } from "@/lib/recently-viewed";
 import { toast } from "sonner";
 import {
   ChevronRight,
   ExternalLink,
+  Heart,
   ShieldCheck,
   ShoppingCart,
   Star,
   Truck,
   RefreshCcw,
+  Plus,
+  Flame,
+  MessageSquare,
+  ThumbsUp,
+  ZoomIn,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -86,16 +96,22 @@ export const Route = createFileRoute("/product/$id")({
 
 function ProductPage() {
   const { product } = Route.useLoaderData();
-  // Scroll to top whenever product changes (clicking a "similar" card).
+  const { push } = useRecentlyViewed();
+  // Scroll to top + track recently viewed whenever product changes.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [product.id]);
+    push(product.id);
+  }, [product.id, push]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-6">
       <Breadcrumb product={product} />
       <ProductHero product={product} />
+      <FrequentlyBoughtTogether product={product} />
+      <ReviewsSection product={product} />
+      <QASection product={product} />
       <SimilarSection product={product} />
+      <RecentlyViewedRail currentId={product.id} />
     </div>
   );
 }
