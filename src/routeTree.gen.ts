@@ -10,21 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WishlistRouteImport } from './routes/wishlist'
+import { Route as SupportRouteImport } from './routes/support'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SellRouteImport } from './routes/sell'
+import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DealsRouteImport } from './routes/deals'
 import { Route as CompareRouteImport } from './routes/compare'
 import { Route as BuildPcRouteImport } from './routes/build-pc'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as AccessoriesRouteImport } from './routes/accessories'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductIdRouteImport } from './routes/product.$id'
+import { Route as PoliciesWarrantyRouteImport } from './routes/policies.warranty'
+import { Route as PoliciesTermsRouteImport } from './routes/policies.terms'
+import { Route as PoliciesShippingRouteImport } from './routes/policies.shipping'
 import { Route as PoliciesReturnsRouteImport } from './routes/policies.returns'
+import { Route as PoliciesPrivacyRouteImport } from './routes/policies.privacy'
 import { Route as CategorySlugRouteImport } from './routes/category.$slug'
 
 const WishlistRoute = WishlistRouteImport.update({
   id: '/wishlist',
   path: '/wishlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SupportRoute = SupportRouteImport.update({
+  id: '/support',
+  path: '/support',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -35,6 +47,11 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DealsRoute = DealsRouteImport.update({
@@ -50,6 +67,11 @@ const CompareRoute = CompareRouteImport.update({
 const BuildPcRoute = BuildPcRouteImport.update({
   id: '/build-pc',
   path: '/build-pc',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AccountRoute = AccountRouteImport.update({
@@ -72,9 +94,29 @@ const ProductIdRoute = ProductIdRouteImport.update({
   path: '/product/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliciesWarrantyRoute = PoliciesWarrantyRouteImport.update({
+  id: '/policies/warranty',
+  path: '/policies/warranty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesTermsRoute = PoliciesTermsRouteImport.update({
+  id: '/policies/terms',
+  path: '/policies/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesShippingRoute = PoliciesShippingRouteImport.update({
+  id: '/policies/shipping',
+  path: '/policies/shipping',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PoliciesReturnsRoute = PoliciesReturnsRouteImport.update({
   id: '/policies/returns',
   path: '/policies/returns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesPrivacyRoute = PoliciesPrivacyRouteImport.update({
+  id: '/policies/privacy',
+  path: '/policies/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategorySlugRoute = CategorySlugRouteImport.update({
@@ -87,28 +129,42 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/account': typeof AccountRoute
+  '/blog': typeof BlogRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
+  '/faq': typeof FaqRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/returns': typeof PoliciesReturnsRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms': typeof PoliciesTermsRoute
+  '/policies/warranty': typeof PoliciesWarrantyRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/account': typeof AccountRoute
+  '/blog': typeof BlogRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
+  '/faq': typeof FaqRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/returns': typeof PoliciesReturnsRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms': typeof PoliciesTermsRoute
+  '/policies/warranty': typeof PoliciesWarrantyRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRoutesById {
@@ -116,14 +172,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/accessories': typeof AccessoriesRoute
   '/account': typeof AccountRoute
+  '/blog': typeof BlogRoute
   '/build-pc': typeof BuildPcRoute
   '/compare': typeof CompareRoute
   '/deals': typeof DealsRoute
+  '/faq': typeof FaqRoute
   '/sell': typeof SellRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support': typeof SupportRoute
   '/wishlist': typeof WishlistRoute
   '/category/$slug': typeof CategorySlugRoute
+  '/policies/privacy': typeof PoliciesPrivacyRoute
   '/policies/returns': typeof PoliciesReturnsRoute
+  '/policies/shipping': typeof PoliciesShippingRoute
+  '/policies/terms': typeof PoliciesTermsRoute
+  '/policies/warranty': typeof PoliciesWarrantyRoute
   '/product/$id': typeof ProductIdRoute
 }
 export interface FileRouteTypes {
@@ -132,42 +195,63 @@ export interface FileRouteTypes {
     | '/'
     | '/accessories'
     | '/account'
+    | '/blog'
     | '/build-pc'
     | '/compare'
     | '/deals'
+    | '/faq'
     | '/sell'
     | '/sitemap.xml'
+    | '/support'
     | '/wishlist'
     | '/category/$slug'
+    | '/policies/privacy'
     | '/policies/returns'
+    | '/policies/shipping'
+    | '/policies/terms'
+    | '/policies/warranty'
     | '/product/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/accessories'
     | '/account'
+    | '/blog'
     | '/build-pc'
     | '/compare'
     | '/deals'
+    | '/faq'
     | '/sell'
     | '/sitemap.xml'
+    | '/support'
     | '/wishlist'
     | '/category/$slug'
+    | '/policies/privacy'
     | '/policies/returns'
+    | '/policies/shipping'
+    | '/policies/terms'
+    | '/policies/warranty'
     | '/product/$id'
   id:
     | '__root__'
     | '/'
     | '/accessories'
     | '/account'
+    | '/blog'
     | '/build-pc'
     | '/compare'
     | '/deals'
+    | '/faq'
     | '/sell'
     | '/sitemap.xml'
+    | '/support'
     | '/wishlist'
     | '/category/$slug'
+    | '/policies/privacy'
     | '/policies/returns'
+    | '/policies/shipping'
+    | '/policies/terms'
+    | '/policies/warranty'
     | '/product/$id'
   fileRoutesById: FileRoutesById
 }
@@ -175,14 +259,21 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccessoriesRoute: typeof AccessoriesRoute
   AccountRoute: typeof AccountRoute
+  BlogRoute: typeof BlogRoute
   BuildPcRoute: typeof BuildPcRoute
   CompareRoute: typeof CompareRoute
   DealsRoute: typeof DealsRoute
+  FaqRoute: typeof FaqRoute
   SellRoute: typeof SellRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SupportRoute: typeof SupportRoute
   WishlistRoute: typeof WishlistRoute
   CategorySlugRoute: typeof CategorySlugRoute
+  PoliciesPrivacyRoute: typeof PoliciesPrivacyRoute
   PoliciesReturnsRoute: typeof PoliciesReturnsRoute
+  PoliciesShippingRoute: typeof PoliciesShippingRoute
+  PoliciesTermsRoute: typeof PoliciesTermsRoute
+  PoliciesWarrantyRoute: typeof PoliciesWarrantyRoute
   ProductIdRoute: typeof ProductIdRoute
 }
 
@@ -193,6 +284,13 @@ declare module '@tanstack/react-router' {
       path: '/wishlist'
       fullPath: '/wishlist'
       preLoaderRoute: typeof WishlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/support': {
+      id: '/support'
+      path: '/support'
+      fullPath: '/support'
+      preLoaderRoute: typeof SupportRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -207,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/sell'
       fullPath: '/sell'
       preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/deals': {
@@ -228,6 +333,13 @@ declare module '@tanstack/react-router' {
       path: '/build-pc'
       fullPath: '/build-pc'
       preLoaderRoute: typeof BuildPcRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/account': {
@@ -258,11 +370,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies/warranty': {
+      id: '/policies/warranty'
+      path: '/policies/warranty'
+      fullPath: '/policies/warranty'
+      preLoaderRoute: typeof PoliciesWarrantyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/terms': {
+      id: '/policies/terms'
+      path: '/policies/terms'
+      fullPath: '/policies/terms'
+      preLoaderRoute: typeof PoliciesTermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/shipping': {
+      id: '/policies/shipping'
+      path: '/policies/shipping'
+      fullPath: '/policies/shipping'
+      preLoaderRoute: typeof PoliciesShippingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/policies/returns': {
       id: '/policies/returns'
       path: '/policies/returns'
       fullPath: '/policies/returns'
       preLoaderRoute: typeof PoliciesReturnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies/privacy': {
+      id: '/policies/privacy'
+      path: '/policies/privacy'
+      fullPath: '/policies/privacy'
+      preLoaderRoute: typeof PoliciesPrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/category/$slug': {
@@ -279,16 +419,33 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccessoriesRoute: AccessoriesRoute,
   AccountRoute: AccountRoute,
+  BlogRoute: BlogRoute,
   BuildPcRoute: BuildPcRoute,
   CompareRoute: CompareRoute,
   DealsRoute: DealsRoute,
+  FaqRoute: FaqRoute,
   SellRoute: SellRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SupportRoute: SupportRoute,
   WishlistRoute: WishlistRoute,
   CategorySlugRoute: CategorySlugRoute,
+  PoliciesPrivacyRoute: PoliciesPrivacyRoute,
   PoliciesReturnsRoute: PoliciesReturnsRoute,
+  PoliciesShippingRoute: PoliciesShippingRoute,
+  PoliciesTermsRoute: PoliciesTermsRoute,
+  PoliciesWarrantyRoute: PoliciesWarrantyRoute,
   ProductIdRoute: ProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
