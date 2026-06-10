@@ -134,22 +134,40 @@ function ProductHero({ product }: { product: Product }) {
   const gallery = getGallery(product);
   const offers = getOffers(product);
   const [active, setActive] = useState(0);
+  const [zoom, setZoom] = useState({ on: false, x: 50, y: 50 });
   const { add, setOpen } = useCart();
+  const wl = useWishlist();
+  const cmp = useCompare();
   const discount = product.mrp ? Math.round(((product.mrp - product.price) / product.mrp) * 100) : 0;
+  // Deterministic-but-varied stock & viewer counts based on id
+  const seed = useMemo(() => product.id.split("").reduce((a, c) => a + c.charCodeAt(0), 0), [product.id]);
+  const stockLeft = 3 + (seed % 9);
+  const viewers = 12 + (seed % 40);
 
-  // Reset on product switch
   useEffect(() => setActive(0), [product.id]);
 
   return (
     <section className="mt-4 grid gap-8 border-b border-border pb-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12">
-      {/* Gallery — sticky on desktop, becomes static after scrolling past details */}
+      {/* Gallery — sticky on desktop */}
       <div className="md:sticky md:top-20 md:self-start">
-        <div className="overflow-hidden rounded-xl border border-border bg-card">
+        <div
+          className="group relative overflow-hidden rounded-xl border border-border bg-card"
+          onMouseEnter={() => setZoom((z) => ({ ...z, on: true }))}
+          onMouseLeave={() => setZoom((z) => ({ ...z, on: false }))}
+          onMouseMove={(e) => {
+            const r = (e.currentTarget as HTMLElement).getBoundingClientRect();
+            setZoom({ on: true, x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+          }}
+        >
           <img
             src={gallery[active]}
             alt={product.name}
-            className="aspect-square w-full object-cover transition-opacity"
+            className="aspect-square w-full object-cover transition-transform duration-200"
+            style={zoom.on ? { transform: "scale(1.8)", transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
           />
+          <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/90 px-2 py-1 text-[10px] font-medium text-muted-foreground backdrop-blur opacity-0 transition-opacity group-hover:opacity-100">
+            <ZoomIn className="h-3 w-3" /> Hover to zoom
+          </span>
         </div>
         <div className="mt-3 grid grid-cols-5 gap-2">
           {gallery.map((src, i) => (
