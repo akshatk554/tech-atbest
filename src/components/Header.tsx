@@ -3,12 +3,14 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Search, ShoppingCart, Menu, X, Cpu, Heart, Scale, User, ChevronDown,
   Laptop, Monitor, MemoryStick, HardDrive, Keyboard, Mouse, Headphones, Tag, Wrench,
+  Sun, Moon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CATEGORIES, PRODUCTS, formatPrice, productsByCategory } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { useWishlist } from "@/lib/wishlist";
 import { useCompare } from "@/lib/compare";
+import { useTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 const CAT_ICONS: Record<string, typeof Laptop> = {
@@ -231,6 +233,7 @@ export function Header() {
 
         {/* Right icons */}
         <div className="flex items-center gap-0.5">
+          <ThemeToggle />
           <IconBtn to="/compare" label={`Compare${cmpCount ? ` (${cmpCount})` : ""}`} badge={cmpCount}>
             <Scale className="h-4 w-4" />
           </IconBtn>
@@ -328,5 +331,20 @@ function MobileItem({ to, icon: Icon, children, params }: { to: string; icon: ty
     <Link to={to} params={params as never} className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-foreground hover:bg-secondary">
       <Icon className="h-4 w-4 text-muted-foreground" /> {children}
     </Link>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      className="h-9 w-9 rounded-lg"
+      onClick={toggle}
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+    >
+      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+    </Button>
   );
 }

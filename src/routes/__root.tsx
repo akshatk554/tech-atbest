@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CartProvider } from "@/lib/cart";
 import { WishlistProvider } from "@/lib/wishlist";
 import { CompareProvider } from "@/lib/compare";
+import { ThemeProvider, THEME_INIT_SCRIPT } from "@/lib/theme";
+import { RecentlyViewedProvider } from "@/lib/recently-viewed";
 import { CartSheet } from "@/components/CartSheet";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -101,6 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" },
     ],
+    scripts: [{ children: THEME_INIT_SCRIPT }],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -127,22 +130,26 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <WishlistProvider>
-          <CompareProvider>
-            <div className="flex min-h-screen flex-col">
-              <Header />
-              <main className="flex-1 pb-16 md:pb-0">
-                <Outlet />
-              </main>
-              <Footer />
-            </div>
-            <MobileTabBar />
-            <CartSheet />
-            <Toaster />
-          </CompareProvider>
-        </WishlistProvider>
-      </CartProvider>
+      <ThemeProvider>
+        <CartProvider>
+          <WishlistProvider>
+            <CompareProvider>
+              <RecentlyViewedProvider>
+                <div className="flex min-h-screen flex-col">
+                  <Header />
+                  <main className="flex-1 pb-16 md:pb-0">
+                    <Outlet />
+                  </main>
+                  <Footer />
+                </div>
+                <MobileTabBar />
+                <CartSheet />
+                <Toaster />
+              </RecentlyViewedProvider>
+            </CompareProvider>
+          </WishlistProvider>
+        </CartProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
